@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="d-flex mt-3 p-4 justify-content-center align-items-center">
+        <div class="col-6 mt-4">
+        <form [formGroup]="myForm" (ngSubmit)="formSub()" class="border p-3 bg-light mt-3 rounded-3">
+            <h3 class="text-center">Form</h3>
+            <div class="row">
+            <div class="col-12 mb-2">
+                <label for="fname" class="form-label">First Name:</label>
+                <input type="text" class="form-control" formControlName="fname" id="fname">
+                <ng-container *ngIf="myForm.get('fname')?.touched">
+                    <ng-container *ngIf="myForm.get('fname')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="col-12 mb-2">
+                <label for="lname" class="form-label">Last Name:</label>
+                <input type="text" class="form-control" formControlName="lname" id="lname">
+                <ng-container *ngIf="myForm.get('lname')?.touched">
+                    <ng-container *ngIf="myForm.get('lname')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="col-12 mb-2">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" class="form-control" formControlName="email" id="email">
+                <ng-container *ngIf="myForm.get('email')?.touched">
+                    <ng-container *ngIf="myForm.get('email')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('email')?.hasError('email')">
+                        <span class="err">*Invalid</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="col-12 mb-2">
+                <label for="phn" class="form-label">Phone No:  <i class="fa-solid fa-plus add" (click)="addPhone()"></i></label>
+                <input type="text" class="form-control" formControlName="phn" id="phn">
+                <ng-container *ngIf="myForm.get('phn')?.touched">
+                    <ng-container *ngIf="myForm.get('phn')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+            <ng-container formArrayName="phnA" *ngFor="let input of phnA.controls; let i = index">
+                <div class="col-12 mb-2">
+                    <label for="phnA{{i}}" class="form-label">Phone No: <i class="fa-solid fa-trash" (click)="deletePhone(i)"></i></label>
+                    <input type="text" class="form-control" [formControlName]="i" id="'phnA' + i">
+                    <ng-container *ngIf="myForm.get('phnA')?.touched">
+                        <ng-container *ngIf="myForm.get('phnA')?.hasError('required')">
+                            <span class="err">*required</span>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <div class="col-12 mb-2">
+                <label for="address" class="form-label">Address: <i class="fa-solid fa-plus add" (click)="addaddress()"></i></label>
+                <input type="text" class="form-control" formControlName="address" id="address">
+                <ng-container *ngIf="myForm.get('address')?.touched">
+                    <ng-container *ngIf="myForm.get('address')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+            <ng-container formArrayName="addressA" *ngFor="let input of addressA.controls; let i = index">
+                <div class="col-12 mb-2">
+                    <label for="addressA{{i}}" class="form-label">Address: <i class="fa-solid fa-trash" (click)="deleteAddress(i)"></i></label>
+                    <input type="text" class="form-control" [formControlName]="i" id="'address' + i">
+                    <ng-container *ngIf="myForm.get('addressA')?.touched">
+                        <ng-container *ngIf="myForm.get('addressA')?.hasError('required')">
+                            <span class="err">*required</span>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <div class="col-12 mb-2">
+                <label for="password" class="form-label">Password:</label>
+                <div class="password-wrapper">
+                    <input type="{{showPassword ? 'text' : 'password'}}" class="form-control" formControlName="password" id="password">
+                    <span class="password-toggle" (click)="togglePassword()">
+                        <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                    </span>
+                </div>
+
+                <ng-container *ngIf="myForm.get('password')?.touched">
+                    <ng-container *ngIf="myForm.get('password')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('password')?.hasError('pattern')">
+                        <span class="err">password must contain at least 1(uppercase,lowercase,digit)</span>
+                    </ng-container>
+                </ng-container>
+            </div>  
+            <div class="col-12 mb-2">
+                <label for="cpassword" class="form-label">Confirm Password:</label>
+
+                <div class="password-wrapper">
+                    <input type="{{showPasswordC ? 'text' : 'password'}}" class="form-control" formControlName="cpassword" id="cpassword">
+                    <span class="password-toggle" (click)="togglePasswordC()">
+                        <i class="fas" [ngClass]="showPasswordC ? 'fa-eye-slash' : 'fa-eye'"></i>
+                    </span>
+                </div>
+
+                <ng-container *ngIf="myForm.get('cpassword')?.touched">
+                    <ng-container *ngIf="myForm.get('cpassword')?.hasError('required')">
+                        <span class="err">*required</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('cpassword')?.hasError('pattern')">
+                        <span class="err">password must contain at least 1(uppercase,lowercase,digit)</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('cpassword')?.value != myForm.get('password')?.value">
+                     <span class="err d-block">Password doesn't match</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>

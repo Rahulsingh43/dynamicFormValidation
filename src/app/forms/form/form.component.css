@@ -1,0 +1,29 @@
+.password-toggle i {
+    font-size: 18px;
+    color: #157ff0;
+  }
+  
+  .password-toggle:hover {
+    color: #5e2929;
+  }
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+  }
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-input {
+    padding-right: 40px; /* Adjust the value as needed to provide enough space for the icon */
+  }
+  .err{
+    font-size: 12px;
+    color: #e61111; 
+    bottom: -20px; 
+    left: 0; 
+}
